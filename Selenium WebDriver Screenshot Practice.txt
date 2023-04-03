@@ -1,0 +1,34 @@
+package pratice;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class test {
+	
+private static WebDriver driver;
+    
+    public static void main(String[] args) throws InterruptedException, IOException {
+        WebDriverManager.edgedriver().setup();
+        driver = new EdgeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://phptravels.com/demo/");
+        Thread.sleep(3000);
+        takeScreenshot("google");
+        driver.quit();
+    }
+    
+    private static void takeScreenshot(String fileName) throws IOException {
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenshot, new File("./Screenshots/" + fileName + ".jpg"));
+    }
+}
+
+
+
